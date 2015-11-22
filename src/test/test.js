@@ -7,19 +7,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var nf = new Netflicker( document.getElementById( 'NF' ), {} );
 
 
-	nf.addItem( { color: 'green' } );
+	nf.addItem( {
+			color: 'green',
+		  	coverImageUrl: 'https://upload.wikimedia.org/wikipedia/en/3/37/Adventure_Time_-_Title_card.png'
+	} );
+
+
 	nf.addItem( { color: 'coral' } );
 	nf.addItem( { color: 'red' } );
 	nf.addItem( { color: 'orange' } );
 	nf.addItem( { color: 'purple' } );
 	nf.addItem( { color: 'blue' } );
 
-	var nf2 = new Netflicker( document.getElementById( 'NFTWO' ), {} );
 
-	nf2.addItem( { color: 'red' } );
-	nf2.addItem( { color: 'green' } );
-	nf2.addItem( { color: 'blue' } );
-	nf2.addItem( { color: 'purple' } );
-	nf2.addItem( { color: 'coral' } );
-	nf2.addItem( { color: 'orange' } );
 });
