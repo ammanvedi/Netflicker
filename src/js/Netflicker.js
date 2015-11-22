@@ -15,6 +15,8 @@ var Netflicker = function( container, config ) {
 
 	this.itemList = [];
 
+	this.extendedDisplay = new Netflicker.extendedDisplay();
+
 	this.container = container;
 	NFUtils.extend( config, this.defaults);
 	this.config = config;
@@ -41,6 +43,6 @@ Netflicker.prototype.initContainer = function() {
 
 Netflicker.prototype.addItem = function( meta ) {
 
-	var newItem = new Netflicker.itemObject( this.holder, this.config.itemConfig, meta ).appendToHolder();
+	var newItem = new Netflicker.itemObject( this.holder, this.config.itemConfig, meta, this.extendedDisplay ).appendToHolder();
 
 };
