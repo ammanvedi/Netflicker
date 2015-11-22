@@ -1,0 +1,54 @@
+/**
+ * Netflicker styles, author Amman Vedi
+ */
+
+
+.nfContainer {
+
+    min-height: 150px;
+    overflow-x: scroll;
+    margin-top: 70px;
+
+}
+
+.nfItemScroller {
+    width: 3000px;
+    min-height: 146px;
+    overflow-y: visible;
+
+
+}
+
+.nfItem {
+    background-color: aquamarine;
+    /* width: 400px; */
+    /* height: 230px; */
+    width: 250px;
+    height: 144px;
+    margin: 0px;
+    display: inline-block;
+    -webkit-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -moz-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
+    margin-bottom: 30px;
+    margin-top: 60px;
+
+}
+
+.largeItem {
+    width: 370px;
+    height: 210px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+
+}
+
+.nfActionIcon {
+
+}
+
+.nfCloseIcon {
+
+}
+
