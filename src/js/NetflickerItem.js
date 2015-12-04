@@ -2,13 +2,18 @@
  * Created by ammanvedi on 20/11/2015.
  */
 
-Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate ) {
+Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nfDelegate ) {
+
+	this.expanded = false;
+
+	this.nfDelegate = nfDelegate;
 
 	this.defaults = {
 		itemHolderClass: "nfItem",
 		actionIconClass: "nfActionIcon",
 		closeIconClass: "nfCloseIcon",
-		itemHoverClass: "largeItem",
+		itemHoverClass: "nfItemHover",
+		staticLargeClass: 'largeItem',
 		color: "aquamarine",
 		metaOverlayClass: "nfOverlayMeta",
 		metaOverlayShadowClass: "nfOverlayShadow",
@@ -27,15 +32,10 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate ) {
 			height: 210
 		}
 
-	}
-
-	//console.log( config );
+	};
 
 	NFUtils.extend( config, this.defaults );
 	this.config = config;
-
-	//console.log( this.config );
-
 	this.defaultMeta = {
 		color: "aquamarine",
 		title: "Placeholder Title",
@@ -49,7 +49,7 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate ) {
 			"../test/img/test4.png"
 		],
 		//int index of bg image or 'RANDOM'
-		coverImageUrl: "http://lorempixel.com/250/144/nature/" + '#' + (Math.floor(Math.random() * (1 - 1111)) + 1),
+		coverImageUrl: "http://lorempixel.com/250/144/nature/" + '#' + (Math.floor( Math.random() * (1 - 1111) ) + 1),
 		//can be div or image
 		moreIcon: "../test/img/testmore.png",
 		closeFullIcon: NFUtils.createWithClass( 'div', [ this.config.closeIconClass ] ),
@@ -67,40 +67,77 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate ) {
 	this.meta = itemMeta;
 	this.holder = holder;
 	this.setDiv();
-	this.addListeners();
+	this.setListeners();
+	this.setHoverClasses();
+	this.setSubscriptions();
 	return this;
 
 };
 
-Netflicker.itemObject.prototype.setDiv = function() {
-	this.container = NFUtils.createWithClass( 'div', [ this.config.itemHolderClass ] );
-	this.metaHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayHolder] );
-	this.metaHolder.appendChild( NFUtils.createWithClass( 'div', [ this.config.metaOverlayShadowClass, 'fadeGradient'] ) );
+Netflicker.itemObject.prototype.setDiv = function () {
+	this.container = NFUtils.createWithClass( 'div', [ this.config.itemHolderClass, 'nfItemHover' ] );
+	this.metaHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayHolder ] );
+	this.metaHolder.appendChild( NFUtils.createWithClass( 'div', [ this.config.metaOverlayShadowClass, 'fadeGradient' ] ) );
 	this.container.appendChild( this.metaHolder );
 	NFUtils.addStyle( this.container, 'background-color: ' + this.meta.color + ';' );
 	NFUtils.addStyle( this.container, 'background-image: url(\'' + this.meta.coverImageUrl + '\');' );
-}
+};
 
-Netflicker.itemObject.prototype.addListeners = function() {
+Netflicker.itemObject.prototype.setSubscriptions = function () {
+
+
+};
+
+Netflicker.itemObject.prototype.setListeners = function () {
 
 	var self = this;
 
-	this.container.addEventListener( 'mouseover', function( event ) {
-		//console.log( 'hoverin', this, self );
-		NFUtils.addClass( this, self.config.itemHoverClass );
-	}, false );
+	this.container.addEventListener( 'click', function ( event ) {
 
-	this.container.addEventListener( 'mouseout', function( event ) {
-		//console.log( 'hoverout', this, self );
-		NFUtils.removeClass( this, self.config.itemHoverClass );
-	}, false );
+		// is another container expanded ? if so un expand these
 
-}
+		self.nfDelegate.getOpenItems().map( function ( item ) {
+			item.setHoverClasses();
+		} );
 
-Netflicker.itemObject.prototype.appendToHolder = function() {
+		self.removeHoverClasses();
+		NFUtils.notify( NFUtils.EVENT_CONSTANTS.SHOW_EXTENDED, { culprit: self } );
+
+	}, true );
+
+};
+
+
+Netflicker.itemObject.prototype.setHoverClasses = function () {
+
+	this.expanded = false;
+
+	NFUtils.removeClass( this.container, this.config.staticLargeClass );
+	NFUtils.addClass( this.container, this.config.itemHoverClass );
+
+};
+
+Netflicker.itemObject.prototype.removeHoverClasses = function () {
+
+	this.expanded = true;
+	NFUtils.removeClass( this.container, this.config.itemHoverClass );
+	NFUtils.addClass( this.container, this.config.staticLargeClass );
+};
+
+Netflicker.itemObject.prototype.addHoverClass = function ( event ) {
+
+	NFUtils.addClass( this.container, this.config.itemHoverClass );
+};
+
+Netflicker.itemObject.prototype.removeHoverClass = function ( event ) {
+	NFUtils.removeClass( this.container, this.config.itemHoverClass );
+};
+
+
+Netflicker.itemObject.prototype.appendToHolder = function () {
 	this.holder.appendChild( this.container );
-}
+};
 
-Netflicker.itemObject.prototype.getDOMElement = function() {
+Netflicker.itemObject.prototype.getDOMElement = function () {
 	return this.container;
-}
+};

@@ -35,13 +35,30 @@
     height: 144px;
     margin: 0px;
     display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 60px;
+    background-size: cover;
+    margin-right: 3px;
+
+}
+
+.nfItemHover {
     -webkit-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     -moz-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
-    margin-bottom: 30px;
-    margin-top: 60px;
-    background-size: cover;
+}
+
+.nfItemHover:hover {
+    width: 370px;
+    height: 210px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.nfItemHover .nfOverlayHolder {
+
+    opacity: 1;
 
 }
 
@@ -53,6 +70,23 @@
     -moz-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
+}
+
+.nfExtendedDisplay {
+    width: 100%;
+    background-color: black;
+    -webkit-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -moz-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
+}
+
+.nfExtendedDisplay.open {
+    height: 100px;
+}
+
+.nfExtendedDisplay.closed {
+    height: 0px;
 }
 
 .largeItem .nfOverlayHolder {
@@ -87,3 +121,18 @@
 
 }
 
+/**
+ * Scroller Classes
+ */
+
+.nfScrollerPaginationControl {
+
+}
+
+.nfScrollerPaginationLeft {
+
+}
+
+.nfScrollerPaginationRight {
+
+}

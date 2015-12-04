@@ -10,6 +10,20 @@ var NFUtils = ( function(){
 
 	return {
 
+		EVENT_CONSTANTS: {
+			SHOW_EXTENDED: 'nf/SHOW_EXTENDED',
+			CLOSE_EXTENDED: 'nf/CLOSE_EXTENDED'
+
+		},
+		makeEvent: function( name, data ) {
+			return new CustomEvent( name, { 'detail': data } );
+		},
+		subscribe: function( eventname, callback ) {
+			document.addEventListener( eventname, callback );
+		},
+		notify: function( name, data ) {
+			document.dispatchEvent( this.makeEvent( name, data ) );
+		},
 		addClass: function( element, classToAdd ) {
 
 			if( element.className.indexOf( classToAdd ) === -1 ) {
@@ -20,16 +34,13 @@ var NFUtils = ( function(){
 
 			if( element && element.className && element.className.indexOf( className ) !== -1 ) {
 				var classArr = element.className.split( ' ' );
-
-				var newClasses
-
+				var newClasses;
 				if( classArr.length === 1 ) {
 					newClasses = classArr.splice( parseInt( classArr.indexOf( className ) ) -1, 1 );
 				} else {
 					newClasses = classArr.splice( parseInt( classArr.indexOf( className ) ), 1 );
 
 				}
-				//var newClasses = classArr.splice( parseInt( classArr.indexOf( className ) ) -1, 1 );
 				element.className = classArr.join( ' ' );
 				return true;
 			}
