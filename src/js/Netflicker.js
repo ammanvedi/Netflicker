@@ -66,7 +66,7 @@ Netflicker.prototype.getOpenItems = function () {
 Netflicker.prototype.initContainer = function () {
 
 	NFUtils.addClass( this.container, this.config.containerClass );
-	this.holder = NFUtils.createWithClass( 'div', [ this.config.itemContainerClass ] );
+	this.holder = NFUtils.createWithClass( 'ul', [ this.config.itemContainerClass ] );
 	this.container.appendChild( this.holder );
 	this.scroller = new Netflicker.ScrollControl( this.holder, this.config.scrollerConfig );
 

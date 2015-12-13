@@ -6,6 +6,8 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nf
 
 	this.expanded = false;
 
+	console.log( itemMeta );
+
 	this.nfDelegate = nfDelegate;
 
 	this.defaults = {
@@ -16,9 +18,16 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nf
 		staticLargeClass: 'largeItem',
 		color: "aquamarine",
 		metaOverlayClass: "nfOverlayMeta",
+		metaInternals: {
+			metaTitleClass: 'nfOverlayMetaTitle',
+			metaDescriptionClass: 'nfOverlayMetaDescription',
+			metaMoreClass: 'nfOverlayMetaMore',
+			metaMoreClassIcon: 'icon-nfmore'
+		},
 		metaOverlayShadowClass: "nfOverlayShadow",
 		metaOverlayHolder: "nfOverlayHolder"
 	};
+
 
 	this.delegate = displayDelegate;
 
@@ -55,7 +64,6 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nf
 		closeFullIcon: NFUtils.createWithClass( 'div', [ this.config.closeIconClass ] ),
 		// div or image
 		actionIcon: NFUtils.createWithClass( 'div', [ this.config.actionIconClass ] ),
-		fullDescription: "Louis Theroux visits whites in South Africa who are refusing to accept Apartheid's end.",
 		fullViewMeta: {
 			starring: "Tom Hardy",
 			genre: "Action/Comedy"
@@ -75,16 +83,44 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nf
 };
 
 Netflicker.itemObject.prototype.setDiv = function () {
-	this.container = NFUtils.createWithClass( 'div', [ this.config.itemHolderClass, 'nfItemHover' ] );
-	this.metaHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayHolder ] );
-	this.metaHolder.appendChild( NFUtils.createWithClass( 'div', [ this.config.metaOverlayShadowClass, 'fadeGradient' ] ) );
-	this.container.appendChild( this.metaHolder );
+	this.container = NFUtils.createWithClass( 'li', [ this.config.itemHolderClass, 'nfItemHover' ] );
+	this.metaOverlayHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayHolder ] );
+	this.metaOverlayHolder.appendChild( NFUtils.createWithClass( 'div', [ this.config.metaOverlayShadowClass, 'fadeGradient' ] ) );
+	this.container.appendChild( this.metaOverlayHolder );
 	NFUtils.addStyle( this.container, 'background-color: ' + this.meta.color + ';' );
 	NFUtils.addStyle( this.container, 'background-image: url(\'' + this.meta.coverImageUrl + '\');' );
+
+	this.createInternals();
+};
+
+Netflicker.itemObject.prototype.displayMetaData = function() {
+
+}
+
+
+Netflicker.itemObject.prototype.createInternals = function() {
+
+	this.metaHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayClass ] );
+
+	this.titleDomElement = NFUtils.createWithClass( 'div', [ this.config.metaInternals.metaTitleClass ] );
+	this.descriptionDomElement = NFUtils.createWithClass( 'div', [ this.config.metaInternals.metaDescriptionClass ] );
+	this.moreDomElement = NFUtils.createWithClass( 'div', [ this.config.metaInternals.metaMoreClass, this.config.metaInternals.metaMoreClassIcon  ] );
+
+	this.metaHolder.appendChild( this.titleDomElement );
+	this.metaHolder.appendChild( this.descriptionDomElement );
+	this.metaHolder.appendChild( this.moreDomElement );
+
+
+	this.metaOverlayHolder.appendChild( this.metaHolder );
+
+	this.displayMetaData();
+
 };
 
 Netflicker.itemObject.prototype.setSubscriptions = function () {
 
+	this.titleDomElement.innerHTML = this.meta.title;
+	this.descriptionDomElement.innerHTML = this.meta.description;
 
 };
 
@@ -92,7 +128,7 @@ Netflicker.itemObject.prototype.setListeners = function () {
 
 	var self = this;
 
-	this.container.addEventListener( 'click', function ( event ) {
+	this.moreDomElement.addEventListener( 'click', function ( event ) {
 
 		// is another container expanded ? if so un expand these
 

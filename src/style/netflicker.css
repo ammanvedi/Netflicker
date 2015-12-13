@@ -1,6 +1,18 @@
+
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: #77bab6;
+}
+
+
 /**
  * Netflicker styles, author Amman Vedi
  */
+
+.icon-nfmore {
+    color: white;
+}
 
 
 .nfContainer {
@@ -25,6 +37,7 @@
     background: linear-gradient(to bottom,  rgba(125,185,232,0) 0%,rgba(125,185,232,0.01) 1%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 
+
 }
 
 .nfItem {
@@ -39,6 +52,12 @@
     margin-top: 60px;
     background-size: cover;
     margin-right: 3px;
+    vertical-align: text-bottom;
+    float: left;
+-webkit-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -moz-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
+    transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
 
 }
 
@@ -54,15 +73,21 @@
     height: 210px;
     margin-bottom: 0px;
     margin-top: 0px;
+
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+
 }
 
 .nfItemHover .nfOverlayHolder {
 
-    opacity: 1;
+    opacity: 0;
 
 }
 
 .nfOverlayHolder {
+    position: relative;
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -71,6 +96,11 @@
     -o-transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985);
     transition: all 500ms cubic-bezier(1.000, 0.000, 0.000, 0.985); /* custom */
 }
+
+.nfOverlayHolder:hover {
+    opacity: 1;
+}
+
 
 .nfExtendedDisplay {
     width: 100%;
@@ -92,17 +122,63 @@
 .largeItem .nfOverlayHolder {
 
     opacity: 1;
-
 }
+
+
 
 .nfOverlayMeta {
+    max-width: 100%;
+    height: 60%;
+    padding-top: 30%;
+    z-index: 1;
 
 
 }
+.nfOverlayMeta:hover {
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.nfOverlayMetaTitle {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+    margin-left:20px;
+    padding-bottom: 8px;
+}
+
+.nfOverlayMetaDescription {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    width: 300px;
+    position: relative;
+    height: 3.4em;
+    overflow: hidden;
+    color: white;
+    margin-left:20px;
+    font-size: 12px;
+
+}
+
+
+.nfOverlayMetaMore {
+    position: relative;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
 
 .nfOverlayShadow {
+    position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 0;
 }
 
 .largeItem {
@@ -110,6 +186,11 @@
     height: 210px;
     margin-bottom: 0px;
     margin-top: 0px;
+
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+
 
 }
 
@@ -120,6 +201,8 @@
 .nfCloseIcon {
 
 }
+
+.nfItem
 
 /**
  * Scroller Classes
