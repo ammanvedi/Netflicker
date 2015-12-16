@@ -13,7 +13,6 @@ var NFUtils = ( function(){
 		EVENT_CONSTANTS: {
 			SHOW_EXTENDED: 'nf/SHOW_EXTENDED',
 			CLOSE_EXTENDED: 'nf/CLOSE_EXTENDED'
-
 		},
 		makeEvent: function( name, data ) {
 			return new CustomEvent( name, { 'detail': data } );
@@ -56,11 +55,25 @@ var NFUtils = ( function(){
 			return el;
 		},
 		addStyle: function( element, style ) {
+
+			style = style.replace( " ", "" );
+
 			if( element.getAttribute( 'style' ) ) {
+
+				var styles = element.getAttribute( 'style' ).split( ';' );
+				for( var i = 0; i < styles.length; i++ ) {
+					if( styles[ i ].indexOf( style.split( ":" )[ 0 ] ) !== -1 ) {
+						//element already has style
+						styles[ i ] = style;
+						element.setAttribute( 'style', styles.join( ';' ) );
+						return;
+					}
+				}
+
 				element.setAttribute( 'style', element.getAttribute( 'style' ) + ' ' + style );
 
 			} else {
-				element.setAttribute( 'style', style );
+				element.setAttribute( 'style', style + ';' );
 			}
 
 		},
