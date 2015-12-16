@@ -34,6 +34,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	nf.addItem( { color: 'orange' } );
 	nf.addItem( { color: 'purple' } );
 	nf.addItem( { color: 'blue' } );
+	nf.addItem( { color: 'red' } );
+	nf.addItem( { color: 'orange' } );
+	nf.addItem( { color: 'purple' } );
+	nf.addItem( { color: 'blue' } );
+	nf.addItem( { color: 'red' } );
+
 
 
 });
