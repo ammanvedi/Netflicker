@@ -7,9 +7,11 @@ var Netflicker = function ( container, config ) {
 
 	this.defaults = {
 		containerClass: "nfContainer",
-		itemContainerClass: "nfItemScroller",
 		itemConfig: {},
-		scrollerConfig: {}
+		scrollerConfig: {
+			itemScrollHolder: "nfScrollHolder",
+			itemContainerClass: "nfItemScroller"
+		}
 	};
 
 	this.itemList = [];
@@ -66,9 +68,11 @@ Netflicker.prototype.getOpenItems = function () {
 Netflicker.prototype.initContainer = function () {
 
 	NFUtils.addClass( this.container, this.config.containerClass );
-	this.holder = NFUtils.createWithClass( 'ul', [ this.config.itemContainerClass ] );
-	this.container.appendChild( this.holder );
-	this.scroller = new Netflicker.ScrollControl( this.holder, this.config.scrollerConfig );
+	this.scrollHolder = NFUtils.createWithClass( 'div', [ this.config.scrollerConfig.itemScrollHolder ] );
+	this.holder = NFUtils.createWithClass( 'ul', [ this.config.scrollerConfig.itemContainerClass ] );
+	this.container.appendChild( this.scrollHolder );
+	this.scrollHolder.appendChild( this.holder );
+	this.scroller = new Netflicker.ScrollControl( this.holder, this.container, this.config.scrollerConfig );
 
 };
 
