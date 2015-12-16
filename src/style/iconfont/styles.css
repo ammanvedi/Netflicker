@@ -47,3 +47,9 @@
 .icon-nfplay:before {
   content: "\63";
 }
+.icon-nfleft:before {
+  content: "\64";
+}
+.icon-nfright:before {
+  content: "\65";
+}
