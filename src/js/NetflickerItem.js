@@ -58,7 +58,7 @@ Netflicker.itemObject = function ( holder, config, itemMeta, displayDelegate, nf
 			"../test/img/test4.png"
 		],
 		//int index of bg image or 'RANDOM'
-		coverImageUrl: "http://lorempixel.com/250/144/nature/" + '#' + (Math.floor( Math.random() * (1 - 1111) ) + 1),
+		coverImageUrl: "",
 		//can be div or image
 		moreIcon: "../test/img/testmore.png",
 		closeFullIcon: NFUtils.createWithClass( 'div', [ this.config.closeIconClass ] ),
@@ -87,8 +87,8 @@ Netflicker.itemObject.prototype.setDiv = function () {
 	this.metaOverlayHolder = NFUtils.createWithClass( 'div', [ this.config.metaOverlayHolder ] );
 	this.metaOverlayHolder.appendChild( NFUtils.createWithClass( 'div', [ this.config.metaOverlayShadowClass, 'fadeGradient' ] ) );
 	this.container.appendChild( this.metaOverlayHolder );
-	NFUtils.addStyle( this.container, 'background-color: ' + this.meta.color + ';' );
-	NFUtils.addStyle( this.container, 'background-image: url(\'' + this.meta.coverImageUrl + '\');' );
+	NFUtils.addStyle( this.container, 'background-color: ' + this.meta.color );
+	NFUtils.addStyle( this.container, 'background-image: url(\'' + this.meta.coverImageUrl + '\')' );
 
 	this.createInternals();
 };
